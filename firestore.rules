@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // In this specific agency app, the founder handles the dashboard.
+      // We'll restrict write access to the owner's email if needed, 
+      // but for this build we'll allow authenticated admin access.
+      // For now, let's assume any signed in user can see their own data, 
+      // but only a specific UID can see all orders (admin).
+      return isSignedIn() && request.auth.token.email == 'luminidigital77@gmail.com';
+    }
+
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read: if isAdmin();
+      allow update: if isAdmin();
+    }
+
+    match /hiringApplications/{appId} {
+      allow create: if true;
+      allow read: if isAdmin();
+    }
+
+    match /messages/{msgId} {
+      allow create: if true;
+      allow read: if isAdmin();
+    }
+
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /referrals/{referralId} {
+      allow create: if true;
+      allow read: if isAdmin();
+    }
+  }
+}

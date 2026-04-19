@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "A purchase order for a digital product",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "paid", "failed", "shipped", "delivered"] },
+        "trackingInfo": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "paymentId": { "type": "string" }
+      },
+      "required": ["fullName", "email", "productId", "amount", "status", "createdAt"]
+    },
+    "HiringApplication": {
+      "title": "Hiring Application",
+      "description": "A job application for a service role",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "skills": { "type": "string" },
+        "portfolioLink": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "role", "createdAt"]
+    },
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "A message from the contact form",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Digital product for sale in the store",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "imageUrl": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["name", "price", "active"]
+    },
+    "Referral": {
+      "title": "Referral",
+      "description": "A client referral submitted by a partner",
+      "type": "object",
+      "properties": {
+        "referrerName": { "type": "string" },
+        "referrerEmail": { "type": "string", "format": "email" },
+        "clientName": { "type": "string" },
+        "projectType": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "verified", "started", "completed", "paid"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["referrerName", "referrerEmail", "clientName", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "orders": {
+      "schema": "Order",
+      "description": "Customer purchase orders"
+    },
+    "hiringApplications": {
+      "schema": "HiringApplication",
+      "description": "Job applications"
+    },
+    "messages": {
+      "schema": "ContactMessage",
+      "description": "Contact form submissions"
+    },
+    "products": {
+      "schema": "Product",
+      "description": "Managed digital products"
+    },
+    "referrals": {
+      "schema": "Referral",
+      "description": "Client referrals for commission"
+    }
+  }
+}

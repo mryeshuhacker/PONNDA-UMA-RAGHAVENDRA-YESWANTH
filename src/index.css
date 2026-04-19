@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk", "Helvetica Neue", sans-serif;
+  
+  --color-lumina-yellow: #FFD700;
+  --color-lumina-digital: #FFFFFF;
+  --color-luxury-black: #050505;
+}
+
+@layer base {
+  body {
+    @apply bg-luxury-black text-white font-sans antialiased selection:bg-lumina-yellow/30 selection:text-lumina-yellow;
+  }
+}
+
+.glow-yellow {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.glow-text-yellow {
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[24px];
+}
+
+.btn-primary {
+  @apply px-8 py-4 bg-lumina-yellow text-black font-semibold rounded-full transition-all duration-300 active:scale-95 hover:shadow-[0_0_20px_rgba(255,215,0,0.3)];
+}
+
+.btn-secondary {
+  @apply px-8 py-4 border border-white/10 bg-white/5 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 active:scale-95;
+}
+
